@@ -48,8 +48,9 @@ object DisplaySim extends JFXApp3 {
   def updateWorld(world: World): World = {
     var tunaToMove = world.tunaList
     var sharksToMove = world.sharksList
-    tunaToMove.foreach(tuna => world.moveTuna(tuna._1, tuna._2))
     sharksToMove.foreach(shark => world.moveShark(shark._1, shark._2))
+    tunaToMove.foreach(tuna => world.moveTuna(tuna._1, tuna._2))
+
 
     world
   }
@@ -68,7 +69,7 @@ object DisplaySim extends JFXApp3 {
       val cycles = new IntegerProperty(this, "cycles", 100)
       title = "Predator Prey Simulation"
       width = 660
-      height = 800
+      height = 700
       scene = new Scene {
 
         fill = White
@@ -179,37 +180,37 @@ object DisplaySim extends JFXApp3 {
             val simulationRectangle = new Rectangle {
               x = 20
               y = 40
-              width = 600
-              height = 600
+              width = stage.height.toDouble * 0.75
+              height = stage.height.toDouble * 0.75
               fill = White
               stroke = Black
             }
 
             val sharkRectangle = new Rectangle {
               x = 20
-              y = 650
-              width = 30
-              height = 30
+              y = stage.height.toDouble * 0.81
+              width = 20
+              height = 20
               fill = Red
             }
 
             val tunaRectangle = new Rectangle {
               x = 20
-              y = 700
-              width = 30
-              height = 30
+              y = stage.height.toDouble * 0.87
+              width = 20
+              height = 20
               fill = Blue
             }
 
             val sharkLabel = new Text("Sharks")
             sharkLabel.layoutX = 60
-            sharkLabel.layoutY = 670
+            sharkLabel.layoutY = stage.height.toDouble * 0.81 + 20
             sharkLabel.setStyle("-fx-font-size: 15pt;")
             sharkLabel.setFill(Red)
 
             val tunaLabel = new Text("Tuna")
             tunaLabel.layoutX = 60
-            tunaLabel.layoutY = 720
+            tunaLabel.layoutY = stage.height.toDouble * 0.87 + 20
             tunaLabel.setStyle("-fx-font-size: 15pt;")
             tunaLabel.setFill(Blue)
 
@@ -220,14 +221,14 @@ object DisplaySim extends JFXApp3 {
             val sharkLocations = world.sharksList.map(_._2)
             val tunaLocations = world.tunaList.map(_._2)
             val sharkCircles = sharkLocations.map(location => new Circle {
-              centerX = location.x * 600 / world.length + 30
-              centerY = location.y * 600 / world.length + 50
+              centerX = location.x * (stage.height.toDouble * 0.75) / world.length + 30
+              centerY = location.y * (stage.height.toDouble * 0.75) / world.length + 50
               radius = 10
               fill = Red
             })
             val tunaCircles = tunaLocations.map(location => new Circle {
-              centerX = location.x * 600 / world.length + 30
-              centerY = location.y * 600 / world.length + 50
+              centerX = location.x * (stage.height.toDouble * 0.75) / world.length + 30
+              centerY = location.y * (stage.height.toDouble * 0.75) / world.length + 50
               radius = 10
               fill = Blue
             })
@@ -244,7 +245,7 @@ object DisplaySim extends JFXApp3 {
             //create a startbutton
             val startButton = new Button("Start the simulation")
             startButton.layoutX = 200
-            startButton.layoutY = 700
+            startButton.layoutY = stage.height.toDouble * 0.87 + 20
             startButton.onMouseClicked = _ => {
               //move to a new scene
               timeline.play()
@@ -258,14 +259,14 @@ object DisplaySim extends JFXApp3 {
               val newSharkLocations = newWorld.sharksList.map(_._2)
               val newTunaLocations = newWorld.tunaList.map(_._2)
               val newSharkCircles = newSharkLocations.map(location => new Circle {
-                centerX = location.x * 600 / world.length + 30
-                centerY = location.y * 600 / world.length + 50
+                centerX = location.x * (stage.height.toDouble * 0.75) / world.length + 30
+                centerY = location.y * (stage.height.toDouble * 0.75) / world.length + 50
                 radius = 10
                 fill = Red
               })
               val newTunaCircles = newTunaLocations.map(location => new Circle {
-                centerX = location.x * 600 / world.length + 30
-                centerY = location.y * 600 / world.length + 50
+                centerX = location.x * (stage.height.toDouble * 0.75) / world.length + 30
+                centerY = location.y * (stage.height.toDouble * 0.75) / world.length + 50
                 radius = 10
                 fill = Blue
               })
